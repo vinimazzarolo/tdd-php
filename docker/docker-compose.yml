@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    php-fpm:
+        build:
+            dockerfile: ./php/Dockerfile
+            context: .
+        image: php-fpm
+        restart: unless-stopped
+        ports:
+            - ${PHP_FPM_PORT}
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        volumes:
+            - ../:/app
+            - ./php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+    nginx:
+        build:
+            dockerfile: ./nginx/Dockerfile
+            context: .
+        ports:
+            - ${WEBSERVER_PORT}:80
+        restart: unless-stopped
+        volumes:
+            - ../:/app
+            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
