@@ -2,11 +2,9 @@
     "name": "vinimazzarolo/docker-php-nginx-mysql",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
-        },
-        "classmap": [
-            "src/"
-        ]
+            "App\\": "src",
+            "Tests\\": "tests"
+        }
     },
     "authors": [
         {
