@@ -9,7 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class BiggerAndSmallerTest extends TestCase
 {
-    public function testAscOrder() {
+    public function testAscOrder()
+    {
         $cart = new Cart();
         $cart->add(new Product('Geladeira', 450.0));
         $cart->add(new Product('Liquidificador', 250.0));
