@@ -22,4 +22,16 @@ class BiggerAndSmallerTest extends TestCase
         $this->assertEquals('Jogo de pratos', $biggerAndSmaller->getSmaller()->getName());
         $this->assertEquals('Geladeira', $biggerAndSmaller->getBigger()->getName());
     }
+
+    public function testOnlySingleProduct()
+    {
+        $cart = new Cart();
+        $cart->add(new Product('Geladeira', 450.0));
+
+        $biggerAndSmaller = new BiggerAndSmaller();
+        $biggerAndSmaller->find($cart);
+
+        $this->assertEquals('Geladeira', $biggerAndSmaller->getSmaller()->getName());
+        $this->assertEquals('Geladeira', $biggerAndSmaller->getBigger()->getName());
+    }
 }
