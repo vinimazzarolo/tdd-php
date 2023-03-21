@@ -5,6 +5,7 @@ namespace Tests\Store\Cart;
 use App\Store\Cart\Cart;
 use App\Store\Produtct\Product;
 use PHPUnit\Framework\TestCase;
+use Tests\Store\Builder\CartBuilder;
 
 class CartTest extends TestCase
 {
@@ -24,8 +25,11 @@ class CartTest extends TestCase
 
     public function testShouldReturnProductPriceIfCartHas1Element()
     {
-        $this->cart->add(new Product('Geladeira', 900.0, 1));
-        $biggerPrice = $this->cart->biggerPrice();
+        $cart = (new CartBuilder())
+            ->withItems(900)
+            ->create();
+
+        $biggerPrice = $cart->biggerPrice();
         $this->assertEquals(900, $biggerPrice);
     }
 
