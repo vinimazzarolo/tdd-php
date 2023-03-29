@@ -32,4 +32,20 @@ class SalaryTest extends TestCase
         $salary = $calculator->execute($dba);
         $this->assertEquals(500 * 0.85, $salary);
     }
+
+    public function testCalculateDbaSalaryUnderLimit()
+    {
+        $calculator = new SalaryCalculator();
+        $dba = new Employee('Vini', 1500.0, Roles::DBA);
+        $salary = $calculator->execute($dba);
+        $this->assertEquals(1500 * 0.85, $salary);
+    }
+
+    public function testCalculateDbaSalaryOverLimit()
+    {
+        $calculator = new SalaryCalculator();
+        $dba = new Employee('Vini', 4500.0, Roles::DBA);
+        $salary = $calculator->execute($dba);
+        $this->assertEquals(4500 * 0.75, $salary);
+    }
 }

@@ -6,10 +6,9 @@ class SalaryCalculator
 {
     public function execute(Employee $employee): float
     {
-        if ($employee->getSalary() > 3000) {
-            return $employee->getSalary() * 0.8;
-        }
-
-        return $employee->getSalary() * 0.9;
+        $rule = new Rule($employee->getRole());
+        $classString = $rule->getRule();
+        $instance = new $classString();
+        return $instance->calculate($employee);
     }
 }
