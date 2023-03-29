@@ -6,7 +6,7 @@ use DateTime;
 
 class InvoiceGenerator
 {
-    public function __construct(private $dao)
+    public function __construct(private $dao, private $sap)
     {
     }
 
@@ -19,7 +19,7 @@ class InvoiceGenerator
         );
 
         $invoiceDao = new InvoiceDao();
-        if ($invoiceDao->persist($invoice)) {
+        if ($invoiceDao->persist($invoice) && $this->sap->send($invoice)) {
             return $invoice;
         }
 
